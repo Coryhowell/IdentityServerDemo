@@ -15,36 +15,46 @@ class ViewController: UIViewController {
     let mainStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 20 
+        stack.spacing = 20
+        stack.alignment = .center
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
-    let loginButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Login", for: .normal)
-        return button
+    let buttonStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 20
+        return stack
     }()
     
-    let logoutButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Logout", for: .normal)
-        return button
+    let mainLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Main Login View"
+        return label
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let loginButton = UIButton.login()
+        let logoutButton = UIButton.logout()
+        let openViewButton = UIButton.defaultStyle(title: "Open View")
  
         view.backgroundColor = .white
         view.addSubview(mainStackView)
-        mainStackView.addArrangedSubview(loginButton)
-        mainStackView.addArrangedSubview(logoutButton)
+        mainStackView.addArrangedSubview(mainLabel)
+        mainStackView.addArrangedSubview(buttonStackView)
+        buttonStackView.addArrangedSubview(loginButton)
+        buttonStackView.addArrangedSubview(logoutButton)
+        mainStackView.addArrangedSubview(openViewButton)
         
         mainStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         mainStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
+        openViewButton.addTarget(self, action: #selector(otherButtonTapped), for: .touchUpInside)
     }
     
     @objc func loginButtonTapped() {
@@ -53,6 +63,11 @@ class ViewController: UIViewController {
     
     @objc func logoutButtonTapped() {
         loginViewModel.logout()
+    }
+    
+    @objc func otherButtonTapped() {
+        let secondVC = SecondViewController()
+        self.present(secondVC, animated: true, completion: nil)
     }
 }
 

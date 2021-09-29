@@ -23,6 +23,9 @@
 		450B83C6270255FA0070ED15 /* AuthResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B83C5270255FA0070ED15 /* AuthResource.swift */; };
 		450B83C8270256500070ED15 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B83C7270256500070ED15 /* AuthProvider.swift */; };
 		450B83CA2703479A0070ED15 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B83C92703479A0070ED15 /* LoginViewModel.swift */; };
+		450B83CE270382B50070ED15 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B83CD270382B40070ED15 /* SecondViewController.swift */; };
+		450B83D22703A98E0070ED15 /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B83D12703A98D0070ED15 /* SecondViewModel.swift */; };
+		45E173A12704BF4C00F9044E /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E173A02704BF4C00F9044E /* UIButton+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		450B83C5270255FA0070ED15 /* AuthResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResource.swift; sourceTree = "<group>"; };
 		450B83C7270256500070ED15 /* AuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
 		450B83C92703479A0070ED15 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		450B83CD270382B40070ED15 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		450B83D12703A98D0070ED15 /* SecondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewModel.swift; sourceTree = "<group>"; };
+		45E173A02704BF4C00F9044E /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +113,7 @@
 				450B83B5270253170070ED15 /* Data+Decodable.swift */,
 				450B83B7270253790070ED15 /* Extensions.swift */,
 				450B83B9270253FB0070ED15 /* URLRequest+Request.swift */,
+				45E173A02704BF4C00F9044E /* UIButton+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -133,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				450B83A1270247C20070ED15 /* ViewController.swift */,
+				450B83CD270382B40070ED15 /* SecondViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -141,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				450B83C92703479A0070ED15 /* LoginViewModel.swift */,
+				450B83D12703A98D0070ED15 /* SecondViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -218,10 +227,13 @@
 				450B83A2270247C20070ED15 /* ViewController.swift in Sources */,
 				450B83B8270253790070ED15 /* Extensions.swift in Sources */,
 				450B83BF270254840070ED15 /* NetworkProvider.swift in Sources */,
+				45E173A12704BF4C00F9044E /* UIButton+Ext.swift in Sources */,
+				450B83CE270382B50070ED15 /* SecondViewController.swift in Sources */,
 				450B83C6270255FA0070ED15 /* AuthResource.swift in Sources */,
 				450B83BD270254330070ED15 /* NetworkResource.swift in Sources */,
 				450B83C8270256500070ED15 /* AuthProvider.swift in Sources */,
 				450B83CA2703479A0070ED15 /* LoginViewModel.swift in Sources */,
+				450B83D22703A98E0070ED15 /* SecondViewModel.swift in Sources */,
 				450B839E270247C20070ED15 /* AppDelegate.swift in Sources */,
 				450B83C4270255310070ED15 /* ClientError.swift in Sources */,
 				450B83B3270252C10070ED15 /* IdentitySession.swift in Sources */,
