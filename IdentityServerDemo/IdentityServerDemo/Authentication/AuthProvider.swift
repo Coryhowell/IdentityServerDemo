@@ -12,7 +12,9 @@ protocol AuthProvider {
     /// User must have a vaild access token
     var isAuthorized: Bool { get }
     /// Create web auth session and handle code exchange
-    func createWebAuthSession(presenter: ASWebAuthenticationPresentationContextProviding, completion: @escaping (ClientError?) -> Void) -> ASWebAuthenticationSession?
+    func createWebAuthSession(presenter: ASWebAuthenticationPresentationContextProviding, completion: @escaping (Result<User?, ClientError>) -> Void) -> ASWebAuthenticationSession?
+    /// Get IDP user info
+    func fetchUser(completion: @escaping (Result<User?, ClientError>) -> Void)
     /// Clear session state and reset window to login
     func logoutUser()
 }
@@ -23,16 +25,16 @@ extension NetworkProvider: AuthProvider {
         print("Authorized session: \(isAuthorized)")
         return isAuthorized
     }
-      
-    func createWebAuthSession(presenter: ASWebAuthenticationPresentationContextProviding, completion: @escaping (ClientError?) -> Void) -> ASWebAuthenticationSession? {
+          
+    func createWebAuthSession(presenter: ASWebAuthenticationPresentationContextProviding, completion: @escaping (Result<User?, ClientError>) -> Void) -> ASWebAuthenticationSession? {
         guard let authURL = AuthResource.authorization().urlComponents.url else { return nil }
-        let authSession = ASWebAuthenticationSession(url: authURL, callbackURLScheme: AuthResource.customScheme, completionHandler: self.exchangeCode(completion: { error in
+        let authSession = ASWebAuthenticationSession(url: authURL, callbackURLScheme: AuthResource.customScheme, completionHandler: self.exchangeCode(completion: { [weak self] error in
             if let error = error {
-                completion(error)
+                completion(.failure(error))
                 return
             }
-            completion(nil)
-            print("ID Token: \(self.session?.idToken as Any) \n  Access Token: \(self.session?.accessToken as Any) \n  Refresh Token: \(self.session?.refreshToken as Any)")
+            
+            self?.fetchUser(completion: completion)
         }))
         authSession.presentationContextProvider = presenter
         if let isEphemeralSession = session?.isEphemeralSession {
@@ -60,6 +62,24 @@ extension NetworkProvider: AuthProvider {
             print("Received code: ", code)
             print("Creating Session")
             self?.createSession(request: request, completion: completion)
+        }
+    }
+    
+    func fetchUser(completion: @escaping (Result<User?, ClientError>) -> Void) {
+        request(resource: AuthResource.userInfo()) { result in
+            guard let userInfo = try? result.get()?.decode(User.self) else {
+                completion(.failure(.noUser))
+                return
+            }
+            
+            let newUser = User(
+                sub: userInfo.sub,
+                email: userInfo.email,
+                phoneNumber: userInfo.phoneNumber,
+                givenName: userInfo.givenName,
+                familyName: userInfo.familyName,
+                name: userInfo.name)
+            completion(.success(newUser))
         }
     }
      

@@ -10,7 +10,7 @@ import AuthenticationServices
 
 class ViewController: UIViewController {
     
-    let loginViewModel = LoginViewModel()
+    var loginViewModel: LoginViewModel!
     
     let mainStackView: UIStackView = {
         let stack = UIStackView()
@@ -36,6 +36,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loginViewModel = LoginViewModel(delegate: self)
         
         let loginButton = UIButton.login()
         let logoutButton = UIButton.logout()
@@ -69,6 +71,11 @@ class ViewController: UIViewController {
         let secondVC = SecondViewController()
         self.present(secondVC, animated: true, completion: nil)
     }
+    
+    func presentUserView(user: User) {
+        let userViewController = UserViewController(user: user)
+        present(userViewController, animated: true, completion: nil)
+    }
 }
 
 extension ViewController: ASWebAuthenticationPresentationContextProviding {
@@ -77,3 +84,15 @@ extension ViewController: ASWebAuthenticationPresentationContextProviding {
     }
 }
 
+
+extension ViewController: LoginViewModelDelegate {
+    func didCreateUser(_ user: User) {
+        presentUserView(user: user)
+    }
+    
+    func didReceiveErrorMessage(_ message: String) {
+        print(message)
+    }
+    
+    
+}

@@ -11,7 +11,7 @@ import AuthenticationServices
 
 class SecondViewController: UIViewController {
     
-    let viewModel = SecondViewModel()
+    var viewModel: SecondViewModel!
     
     let mainStackView: UIStackView = {
         let stack = UIStackView()
@@ -30,6 +30,9 @@ class SecondViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel = SecondViewModel(delegate: self)
+        
         view.backgroundColor = .white
         
         let loginButton = UIButton.login()
@@ -47,10 +50,25 @@ class SecondViewController: UIViewController {
     @objc func loginButtonTapped() {
         viewModel.login(presenter: self)
     }
+    
+    func presentUserView(user: User) {
+        let userViewController = UserViewController(user: user)
+        present(userViewController, animated: true, completion: nil)
+    }
 }
 
 extension SecondViewController: ASWebAuthenticationPresentationContextProviding {
     func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
         return view.window! 
+    }
+}
+
+extension SecondViewController: LoginViewModelDelegate {
+    func didCreateUser(_ user: User) {
+        presentUserView(user: user)
+    }
+    
+    func didReceiveErrorMessage(_ message: String) {
+        print(message)
     }
 }

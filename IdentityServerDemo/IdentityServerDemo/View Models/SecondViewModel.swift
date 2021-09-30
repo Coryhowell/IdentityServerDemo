@@ -11,14 +11,28 @@ import AuthenticationServices
 
 class SecondViewModel {
     
+    weak var delegate: LoginViewModelDelegate?
+    
     var authProvider: AuthProvider = NetworkProvider.shared
     
+    init(delegate: LoginViewModelDelegate) {
+        self.delegate = delegate
+    }
+        
     func login(presenter: ASWebAuthenticationPresentationContextProviding) {
-        authProvider.createWebAuthSession(presenter: presenter) { error in
-            if error == .canceledLogin {
-                return
+        authProvider.createWebAuthSession(presenter: presenter) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let user):
+                    if let user = user {
+                        self?.delegate?.didCreateUser(user)
+                    }
+                case .failure(let error):
+                    if error != .canceledLogin {
+                        self?.delegate?.didReceiveErrorMessage(error.localizedDescription)
+                    }
+                }
             }
-
         }?.start()
     }
     

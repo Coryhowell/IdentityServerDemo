@@ -10,6 +10,7 @@ import Foundation
 enum ClientError: LocalizedError {
     case canceledLogin
     case codeExchangeFailed
+    case noUser
     case unauthorized
     case createSessionFailed
     case sessionInvalid
@@ -17,6 +18,7 @@ enum ClientError: LocalizedError {
     
     var errorDescription: String? {
         switch self {
+        case .noUser: return NSLocalizedString("We failed to fetch your user information", comment: "")
         default: return NSLocalizedString("We failed to log you in", comment: "")
         }
     }

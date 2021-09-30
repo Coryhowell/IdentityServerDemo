@@ -12,6 +12,8 @@ class NetworkProvider {
     typealias DataTaskCompletionHandler = (Data?, URLResponse?, Error?) -> Void
     
     static let shared = NetworkProvider()
+    
+    let queue = DispatchQueue(label: "NetworkProvider", qos: .userInteractive)
         
     let urlSession: URLSession
     
@@ -35,6 +37,32 @@ class NetworkProvider {
     
     func saveSession() {
         // save session to keychain
+    }
+    
+    /// Build and make authorized URLSession dataTask request for NetworkResource.
+    func request(resource: NetworkResource, completion: @escaping (Result<Data?, NetworkError>) -> Void) {
+        queue.async {
+            var anyError: ClientError?
+            
+            // Start token refresh step
+            self.refreshSession { error in
+                anyError = error
+            }
+            
+            // Try and unwrap authorized request
+            guard anyError == nil,
+                let session = self.session,
+                let request = resource.authorizedRequest(session: session) else {
+                    
+                    DispatchQueue.main.async {
+                        self.logoutUser()
+                    }
+                    completion(.failure(.unauthorized))
+                    return
+            }
+            // Complete authorized request
+            self.makeRequest(request: request, completion: completion)
+        }
     }
     
     

@@ -26,6 +26,8 @@
 		450B83CE270382B50070ED15 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B83CD270382B40070ED15 /* SecondViewController.swift */; };
 		450B83D22703A98E0070ED15 /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B83D12703A98D0070ED15 /* SecondViewModel.swift */; };
 		45E173A12704BF4C00F9044E /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E173A02704BF4C00F9044E /* UIButton+Ext.swift */; };
+		45E173A32704DD0F00F9044E /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E173A22704DD0E00F9044E /* UserViewController.swift */; };
+		45E173A5270624B800F9044E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E173A4270624B800F9044E /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		450B83CD270382B40070ED15 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		450B83D12703A98D0070ED15 /* SecondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewModel.swift; sourceTree = "<group>"; };
 		45E173A02704BF4C00F9044E /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
+		45E173A22704DD0E00F9044E /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		45E173A4270624B800F9044E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,7 @@
 				450B83B2270252C10070ED15 /* IdentitySession.swift */,
 				450B83C5270255FA0070ED15 /* AuthResource.swift */,
 				450B83C7270256500070ED15 /* AuthProvider.swift */,
+				45E173A4270624B800F9044E /* User.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -141,6 +146,7 @@
 			children = (
 				450B83A1270247C20070ED15 /* ViewController.swift */,
 				450B83CD270382B40070ED15 /* SecondViewController.swift */,
+				45E173A22704DD0E00F9044E /* UserViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -225,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				450B83A2270247C20070ED15 /* ViewController.swift in Sources */,
+				45E173A32704DD0F00F9044E /* UserViewController.swift in Sources */,
 				450B83B8270253790070ED15 /* Extensions.swift in Sources */,
 				450B83BF270254840070ED15 /* NetworkProvider.swift in Sources */,
 				45E173A12704BF4C00F9044E /* UIButton+Ext.swift in Sources */,
@@ -241,6 +248,7 @@
 				450B83BA270253FB0070ED15 /* URLRequest+Request.swift in Sources */,
 				450B83B6270253170070ED15 /* Data+Decodable.swift in Sources */,
 				450B83C2270255000070ED15 /* NetworkError.swift in Sources */,
+				45E173A5270624B800F9044E /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
